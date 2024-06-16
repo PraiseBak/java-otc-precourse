@@ -2,7 +2,12 @@ package pairmatching.domain;
 
 import pairmatching.helper.Course;
 
-public class Crew {
+public class Crew implements Comparable<Crew>{
+
+    public String getCrewName() {
+        return crewName;
+    }
+
     @Override
     public String toString() {
         return "Crew{" +
@@ -19,4 +24,12 @@ public class Crew {
 
     private final String crewName;
     private final Course course;
+
+    @Override
+    public int compareTo(Crew otherCrew) {
+        if (otherCrew == null) {
+            throw new NullPointerException("비교 대상이 null입니다.");
+        }
+        return this.crewName.compareTo(otherCrew.crewName);
+    }
 }
