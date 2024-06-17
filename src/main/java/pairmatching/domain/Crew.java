@@ -10,10 +10,7 @@ public class Crew implements Comparable<Crew>{
 
     @Override
     public String toString() {
-        return "Crew{" +
-                "crewName='" + crewName + '\'' +
-                ", course=" + course +
-                '}';
+        return crewName;
     }
 
     public Crew(String crewName, Course course)

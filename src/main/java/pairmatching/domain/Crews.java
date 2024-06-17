@@ -4,11 +4,21 @@ import camp.nextstep.edu.missionutils.Randoms;
 import pairmatching.helper.Course;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Crews {
+    public Course getCourse() {
+        return course;
+    }
+
+    private final Course course;
+
+    @Override
+    public String toString() {
+        return crewList.stream().map((crew) -> crew.toString()).collect(Collectors.joining(","));
+    }
+
 
     private List<Crew> crewList;
 
@@ -16,50 +26,35 @@ public class Crews {
         return crewList.size();
     }
 
-    public Crews(List<Crew> crewList) {
+    public Crews(List<Crew> crewList,Course course) {
+        this.course = course;
         this.crewList = crewList;
     }
 
-
-    /**
-     * within side effect
-     */
-    public void shuffle(){
-        this.crewList = Randoms.shuffle(crewList);
+    public Crews shuffle(){
+        return Crews.ofCrewList(Randoms.shuffle(crewList),course);
     }
-    /**
-     * without side effect
-     * todo side effect없어야함 왜냐하면 재요청했을때 똑같은 값이 나와야하니까
-     */
-    public void shuffle2(){
-        this.crewList = Randoms.shuffle(crewList);
+
+    public static Crews ofCrewList(List<Crew> crewList,Course course) {
+        return new Crews(crewList,course);
     }
 
     public static Crews of(List<String> crewNameArr,Course course) {
-        return new Crews(crewNameArr.stream().map((crewName) -> new Crew(crewName,course)).collect(Collectors.toList()));
+        return new Crews(crewNameArr.stream().map((crewName) -> new Crew(crewName,course)).collect(Collectors.toList()),course);
     }
 
-    public Crews combine(Crews other){
-        this.crewList.addAll(other.crewList);
-        return new Crews(Collections.unmodifiableList(this.crewList));
-    }
-
-    public Pairs createPair() {
+    public List<Pair> createPairList() {
         List<Pair> pairList = new ArrayList<>();
         List<Crew> pairCrewList = new ArrayList<>();
-        //함수형으로 하면 좋을듯
+
         for(int i=0;i<crewList.size();i++){
-            if(i % 2 == 0){
+            pairCrewList.add(crewList.get(i));
+            if(pairCrewList.size() == 2){
                 pairList.add(Pair.from(pairCrewList));
                 pairCrewList = new ArrayList<>();
             }
-            pairCrewList.add(pairCrewList.get(i));
         }
-
-        if(pairCrewList.size() % 2 != 0){
-            pairCrewList.add(crewList.get(crewList.size()-1));
-            pairList.add(Pair.from(pairCrewList));
-        }
-        return Pairs.from(pairList);
+        if(crewList.size() % 2 != 0) pairList.get(pairList.size()-1).addCrew(pairCrewList);
+        return pairList;
     }
 }

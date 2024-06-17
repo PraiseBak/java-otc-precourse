@@ -12,5 +12,12 @@ public enum Level {
         this.name = name;
     }
 
-    // 추가 기능 구현
+    public static Level fromString(String name) {
+        for (Level course : Level.values()) {
+            if (course.name.equals(name)) {
+                return course;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant with name " + name);
+    }
 }

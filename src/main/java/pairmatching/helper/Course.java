@@ -9,7 +9,12 @@ public enum Course {
         this.name = name;
     }
 
-
-
-    // 추가 기능 구현
+    public static Course fromString(String name) {
+        for (Course course : Course.values()) {
+            if (course.name.equals(name)) {
+                return course;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant with name " + name);
+    }
 }
