@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PairsGroup {
-    private static List<Pairs> pairsList = new ArrayList<>();
+    private List<Pairs> pairsList = new ArrayList<>();
 
     public void addPairs(Crews crews, PairMatchOption pairMatchOption){
         for(int i=0;i<3;i++){
@@ -16,7 +16,7 @@ public class PairsGroup {
             if(isExistSamePairInSameLevel(pairMatchOption.level,resultPairs)){
                 continue;
             }
-            pairsList.add(Pairs.createPairs(crews,pairMatchOption));
+            pairsList.add(resultPairs);
             return;
         }
         throw new IllegalArgumentException("페어를 만드는데 실패하였습니다");
@@ -25,12 +25,10 @@ public class PairsGroup {
     private boolean isExistSamePairInSameLevel(Level level,Pairs resultPairs) {
         for(Pairs pairs : pairsList){
             if(!pairs.isSameLevel(level)) continue;
-            if(pairs.isSamePairExists(resultPairs)) return true;
+            if(pairs.isDuplicatePairExists(resultPairs)) return true;
         }
-
         return false;
     }
-
 
     public void removeSamePair(PairMatchOption pairMatchOption){
         for(Pairs pairs : pairsList){

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class Pair implements Comparable<Pair>{
+public class Pair{
     List<Crew> crewList = new ArrayList<>();
 
     @Override
@@ -46,21 +46,6 @@ public class Pair implements Comparable<Pair>{
         return new Pair(crewList);
     }
 
-    @Override
-    public int compareTo(Pair pair) {
-        Collections.sort(pair.crewList);
-        Collections.sort(this.crewList);
-
-        String thisCrewListNames = this.crewList.stream()
-                .map(Crew::getCrewName)
-                .sorted() // 필요에 따라 정렬
-                .collect(Collectors.joining(", "));
-        String thatCrewListNames = pair.crewList.stream()
-                .map(Crew::getCrewName)
-                .sorted() // 필요에 따라 정렬
-                .collect(Collectors.joining(", "));
-        return thisCrewListNames.compareTo(thatCrewListNames);
-    }
 
     public void addCrew(List<Crew> pairCrewList) {
         this.crewList.addAll(pairCrewList);

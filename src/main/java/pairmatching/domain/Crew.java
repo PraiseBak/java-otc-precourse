@@ -2,7 +2,21 @@ package pairmatching.domain;
 
 import pairmatching.helper.Course;
 
+import java.util.Objects;
+
 public class Crew implements Comparable<Crew>{
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Crew crew = (Crew) o;
+        return Objects.equals(crewName, crew.crewName) && course == crew.course;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(crewName, course);
+    }
 
     public String getCrewName() {
         return crewName;
