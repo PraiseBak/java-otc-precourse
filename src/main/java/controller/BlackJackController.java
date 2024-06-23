@@ -10,8 +10,7 @@ public class BlackJackController {
     public static void start(){
         List<String> usernameList = InputView.inputUserName();
         Players players = Players.from(usernameList);
-
-        BlackJackGame.from(players);
-        BlackJackGame.start();
+        BlackJackGame blackJackGame = BlackJackGame.from(players);
+        blackJackGame.initCard();
     }
 }
