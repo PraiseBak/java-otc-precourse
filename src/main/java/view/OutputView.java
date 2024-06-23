@@ -1,5 +1,6 @@
 package view;
 
+import domain.Card;
 import error.IllegalInputException;
 import error.InputErrorEnum;
 import validate.InputValidator;
@@ -10,7 +11,8 @@ public class OutputView {
     private static final String REQUEST_MORE_CARD = "카드를 더 뽑으시겠습니까? [y/n]";
 
 //    public static final String PRINT_USERNAME= "유저네임을 입력해주세요";
-    public static final String PRINT_USER_INFO = "[%d번째 유저 %s님의 턴입니다]";
+public static final String PRINT_USER_INFO = "[%d번째 유저 %s님의 턴입니다]";
+    public static final String PRINT_DRAW_CARD = "[%d번째 유저 %s님의 턴입니다]";
 
 
 
@@ -30,5 +32,11 @@ public class OutputView {
     }
 
 
+    public static void printCard(Card card) {
+        System.out.println(card);
+    }
 
+    public static void printDraw() {
+        System.out.println(PRINT_DRAW_CARD);
+    }
 }
