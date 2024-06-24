@@ -12,7 +12,8 @@ public enum CardType {
 
     private final String type;
 
-    public Object getCardTypeStr() {
+    public String getCardTypeStr() {
         return type;
     }
+
 }
