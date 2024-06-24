@@ -11,6 +11,8 @@ public class Deck {
     private static final int SPECIAL_CARD_NUM = 10;
     private static final int NORMAL_CARD_SIZE = 10;
 
+    private static final String[] specialCardInfo = {"Q","J","K"};
+
     static {
         List<CardType> cardTypeList = List.of(CardType.values());
 
@@ -20,15 +22,11 @@ public class Deck {
                 cardList.add(Card.from(cardType,i));
             }
 
-            //QJK
             for (int i = 0; i < SPECIAL_CARD_SIZE; i++) {
-                cardList.add(Card.from(cardType,SPECIAL_CARD_NUM));
+                cardList.add(Card.from(cardType,SPECIAL_CARD_NUM,specialCardInfo[i]));
             }
         }
-
     }
-
-
 
     public static Card drawCard() {
         Random random = new Random();
