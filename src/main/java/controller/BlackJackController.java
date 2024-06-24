@@ -11,6 +11,10 @@ public class BlackJackController {
         List<String> usernameList = InputView.inputUserName();
         Players players = Players.from(usernameList);
         BlackJackGame blackJackGame = BlackJackGame.from(players);
-        blackJackGame.initCard();
+        blackJackGame.init();
+        blackJackGame.additionalDraw();
+        blackJackGame.showCardResult();
+        blackJackGame.showGameResult();
+
     }
 }

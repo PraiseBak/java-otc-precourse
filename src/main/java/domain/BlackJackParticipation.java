@@ -8,9 +8,9 @@ public interface BlackJackParticipation {
      * 딜러면 17초과
      * @return boolean
      */
-    public boolean isDrawable();
+    public boolean isBurst();
 
-    public void showCards();
+    public void showCard();
 
 
 
