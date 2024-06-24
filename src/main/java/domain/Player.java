@@ -1,37 +1,38 @@
 package domain;
 
-import strategy.ShowCardStrategy;
-
-import java.util.HashSet;
+import strategy.CardStrategy;
+import view.OutputView;
 
 public class Player implements BlackJackParticipation{
-    private ShowCardStrategy showCardStrategy;
+    private final CardStrategy cardStrategy;
 
-    Cards cards = new Cards();
+    private Cards cards = new Cards();
 
-    String username;
+    private final String username;
+    private final int id;
+    //유저가 드로우를 그만하기로함
+    private boolean stopDraw = false;
 
 
-    private Player(String username,ShowCardStrategy showCardStrategy){
+    private Player(String username, int id, CardStrategy cardStrategy){
         this.username = username;
-        this.showCardStrategy = showCardStrategy;
+        this.cardStrategy = cardStrategy;
+        this.id = id;
     }
 
 
-    public static Player from(String username,ShowCardStrategy showCardStrategy) {
-        return new Player(username,showCardStrategy);
+    public static Player from(String username, int id, CardStrategy cardStrategy) {
+        return new Player(username,id, cardStrategy);
     }
 
     @Override
     public void drawCard() {
-        if(isDrawable()){
-            cards.drawCard();
-        }
+        cardStrategy.draw(cards);
     }
 
     @Override
-    public boolean isDrawable() {
-        return cards.isDrawable();
+    public boolean isBurst() {
+        return cards.isBurst();
     }
 
     public int getScore() {
@@ -39,8 +40,37 @@ public class Player implements BlackJackParticipation{
     }
 
     @Override
+    public void showCard() {
+        printUserInfo();
+        cardStrategy.show(cards);
+    }
+
+
+
+
+    public void printUserInfo() {
+        OutputView.printCurUser(id,username);
+    }
+
+
+    public boolean isBlackjack(){
+        return cards.isBlackjack();
+    }
+
+    public boolean isDrawable(){
+        return !stopDraw && !isBurst() && !isBlackjack();
+    }
+
+    public void stopDraw(){
+        this.stopDraw = true;
+    }
+
+    public GameResultDto getGameResult() {
+        return new GameResultDto(username,getScore());
+    }
+
     public void showCards() {
-        showCardStrategy.show(cards);
-        cards.showLastCard();
+        printUserInfo();
+        cards.showAllCard();
     }
 }
