@@ -13,7 +13,7 @@ public class InputView {
     private final static Scanner sc = new Scanner(System.in);
 
     public static List<String> inputUserName(){
-        OutputView.printUserName();
+        OutputView.printRequestUserName();
         String username = sc.nextLine();
         if(!InputValidator.validateUsername(username)) throw new IllegalInputException(InputErrorEnum.INVALID_USERNAME);
         return Arrays
@@ -23,8 +23,9 @@ public class InputView {
 
     public static boolean inputMoreCard(){
         OutputView.printMoreCard();
-        if(!InputValidator.validateMoreCard()) throw new IllegalInputException(InputErrorEnum.INVALID_RESPONSE);
-        return sc.nextLine().equals("y");
+        String response = sc.nextLine();
+        if(!InputValidator.validateMoreCard(response)) throw new IllegalInputException(InputErrorEnum.INVALID_RESPONSE);
+        return response.equals("y");
     }
 
 

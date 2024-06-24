@@ -6,6 +6,7 @@ public class InputValidator{
         return !(username.startsWith(",") || username.endsWith(","));
     }
 
-    public static boolean validateMoreCard() {
+    public static boolean validateMoreCard(String s) {
+        return s.equals("y") || s.equals("n");
     }
 }
