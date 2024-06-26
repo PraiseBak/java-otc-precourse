@@ -1,6 +1,6 @@
 package strategy;
 
-import domain.Cards;
+import domain.card.Cards;
 
 public interface CardStrategy {
     void show(Cards cards);

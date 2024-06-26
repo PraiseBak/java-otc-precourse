@@ -1,6 +1,6 @@
 package strategy;
 
-import domain.Cards;
+import domain.card.Cards;
 
 public class PlayerCardStrategy implements CardStrategy {
     public void show(Cards cards) {

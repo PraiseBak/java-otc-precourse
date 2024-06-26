@@ -29,10 +29,9 @@ public class InputView {
     }
 
 
-
-
-
-
-
-
+    public static int inputBet() {
+        OutputView.printBetRequest();
+        String response = sc.nextLine();
+        return Integer.parseInt(response);
+    }
 }

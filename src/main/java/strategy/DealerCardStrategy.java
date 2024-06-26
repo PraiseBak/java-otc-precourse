@@ -1,6 +1,6 @@
 package strategy;
 
-import domain.Cards;
+import domain.card.Cards;
 import view.OutputView;
 
 public class DealerCardStrategy implements CardStrategy {

@@ -1,7 +1,10 @@
-package domain;
+package domain.player;
 
+import domain.game.BetDto;
+import domain.game.GameResultDto;
 import strategy.PlayerCardStrategy;
 import view.InputView;
+import view.OutputView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -70,5 +73,13 @@ public class Players {
             player.printUserInfo();
             player.showCards();
         }
+    }
+
+    public List<BetDto> collectBets() {
+        return playerList.stream()
+                .map((player) -> {
+                    player.printUserInfo();
+                    return player.bet();
+                }).collect(Collectors.toList());
     }
 }

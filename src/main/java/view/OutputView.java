@@ -1,7 +1,7 @@
 package view;
 
-import domain.Card;
-import domain.GameResultDto;
+import domain.card.Card;
+import domain.game.GameResultDto;
 
 import java.util.List;
 
@@ -19,6 +19,8 @@ public static final String PRINT_USER_INFO = "[%d번째 유저 %s님의 턴입�
     private static final String PRINT_CANNOT_DRAW = "더이상 드로우할 수 없습니다";
 
     private static final String PRINT_ALL_WIN = "무승부입니다";
+    private static final String PRINT_BET_REQUEST = "베팅해주세요 [숫자 형식]";
+    private static final String PRINT_BET_RESULT = "베팅결과입니다 이름: %s 최종 수익: %f ";
 
 
     public static void printCurUser(int curUserIdx,String username){
@@ -56,4 +58,12 @@ public static final String PRINT_USER_INFO = "[%d번째 유저 %s님의 턴입�
         System.out.println(PRINT_ALL_WIN);
     }
 
+    public static void printBetRequest() {
+        System.out.println(PRINT_BET_REQUEST);
+    }
+
+    public static void printBetResult(String username, Double betResult) {
+        System.out.println(String.format(PRINT_BET_RESULT,username,betResult));
+
+    }
 }

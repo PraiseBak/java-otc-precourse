@@ -1,6 +1,14 @@
-package domain;
+package domain.game;
 
 public class GameResultDto {
+    @Override
+    public String toString() {
+        return "GameResultDto{" +
+                "username='" + username + '\'' +
+                ", score=" + score +
+                '}';
+    }
+
     public GameResultDto(String username, int score) {
         this.username = username;
         this.score = score;

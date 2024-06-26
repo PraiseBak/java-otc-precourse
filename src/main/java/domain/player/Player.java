@@ -1,16 +1,22 @@
-package domain;
+package domain.player;
 
+import domain.game.BetDto;
+import domain.game.GameResultDto;
+import domain.card.Cards;
 import strategy.CardStrategy;
+import view.InputView;
 import view.OutputView;
 
-public class Player implements BlackJackParticipation{
+import java.util.Objects;
+
+public class Player implements BlackJackParticipation {
     private final CardStrategy cardStrategy;
 
     private Cards cards = new Cards();
 
     private final String username;
     private final int id;
-    //유저가 드로우를 그만하기로함
+
     private boolean stopDraw = false;
 
 
@@ -45,9 +51,6 @@ public class Player implements BlackJackParticipation{
         cardStrategy.show(cards);
     }
 
-
-
-
     public void printUserInfo() {
         OutputView.printCurUser(id,username);
     }
@@ -72,5 +75,23 @@ public class Player implements BlackJackParticipation{
     public void showCards() {
         printUserInfo();
         cards.showAllCard();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(username, player.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
+    }
+
+    public BetDto bet() {
+        int bet = InputView.inputBet();
+        return new BetDto(username,bet);
     }
 }
